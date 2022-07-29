@@ -32,7 +32,7 @@ Using SIMATIC Target, we can directly upload this model from Simulink to the Liv
 The simulation parameters can then be configured and the simulation run in LiveTwin. A PLC program provides changing input values of the pump rotational speed. The estimated flow rate is then written back into the PLC, where the results can be used to take action.
 
 
-![task](docs/graphics/example_graphic.png)
+![task](docs/graphics/architecture.png)
 
 ## Requirements
 
@@ -47,11 +47,11 @@ The simulation parameters can then be configured and the simulation run in LiveT
 ### Used components
 
 * Industrial Edge Device V1.7.0-18
-* LiveTwin V2.x.x
-* S7 Connector V1.7.0
-* S7 Connector Configurator V1.x.x
-* IE Databus V 1.x.x
-* IE Databus Configurator V 1.x.x
+* LiveTwin V2.1.16
+* S7 Connector V1.7.0-27
+* Common Connector Configurator V1.7.0-18
+* IE Databus V 1.7.0
+* IE Databus Configurator V 1.7.2
 * TIA Portal V17
 * PLC: CPU 1212C FW V4.4
 * MATLAB Simulink R2022a
@@ -60,7 +60,7 @@ The simulation parameters can then be configured and the simulation run in LiveT
 
 ## Installation and Usage
 
-You can find the installation and usage instructions in the [documentation](docs/Installation.md).
+You can find the installation and usage instructions in the [documentation](docs/Documentation.md).
 
 ## Documentation
 
