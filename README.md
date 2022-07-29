@@ -20,19 +20,19 @@ Running a simulation model on an Industrial Edge Device using the Siemens app Li
 
 In many industrial use-cases, information about internal states of a system is often required, but necessitates the purchase and integration of hardware sensors. Some states may not be directly measurable at all.
 
-One approach to solve this issue is by mathematically modelling the system, using real input data for this simulation, and observing the internal states of this virtual counterpart. In this example, a Simulink model of a centrifugal pump has been created in order to estimate the flow rate based on the pump rotational speed.
+One approach to solve this issue is by mathematically modelling the system, using real input data for the simulation, and observing the internal states of this virtual counterpart. In this example, a Simulink model of a centrifugal pump has been provided in order to estimate the flow rate based on the pump rotational speed.
 
 
 ### General Task
 
 This example shows how to use the Industrial Edge App LiveTwin to implement a soft (virtual) sensor for a centrifugal pump based on a MATLAB Simulink model.
 
-Using SIMATIC Target, we can directly upload this model from Simulink to the LiveTwin app running on an Industrial Edge Device. Alternatively, the provided .zip file can also be uploaded into LiveTwin without having to install MATLAB or SIMATIC Target.
+Using the SIMATIC Target software module, we can directly upload this model from Simulink to the LiveTwin app running on an Industrial Edge Device. Alternatively, the provided .zip file can also be uploaded into LiveTwin without having a local installation of MATLAB or SIMATIC Target.
 
 The simulation parameters can then be configured and the simulation run in LiveTwin. A PLC program provides changing input values of the pump rotational speed. The estimated flow rate is then written back into the PLC, where the results can be used to take action.
 
 
-![task](docs/graphics/architecture.png)
+![architecture](/docs/graphics/architecture.png)
 
 ## Requirements
 
@@ -55,7 +55,7 @@ The simulation parameters can then be configured and the simulation run in LiveT
 * TIA Portal V17
 * PLC: CPU 1212C FW V4.4
 * MATLAB Simulink R2022a
-* Simscape Fluids (Trial License is enough)
+* Simscape Fluids (Trial License is sufficient)
 * SIMATIC Target V5.0
 
 ## Installation and Usage
