@@ -15,9 +15,13 @@
 
 ## PLC Connection
 
+The following apps must be installed on your IED in order to complete this guide:
+
+![ied01](/docs/graphics/ied_01.png)
+
 ### PLC Program
 
-Download the provided [TIA Portal V17 project](/src/LiveTwin_Pump.zap17) into your PLC. Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in l/min that will be written back to the PLC from LiveTwin.
+Download the provided [TIA Portal V17 project](/src/LiveTwin_Pump.zap17) into your PLC. Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables of data type `Real`: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in `l/min` that will be written back to the PLC from LiveTwin.
 
 ### Databus Configuration
 
@@ -45,11 +49,11 @@ This guide shows two different ways to import the Simulink model into LiveTwin. 
 
 ### SIMATIC Target and Simulink
 
-If you're want to play around with the model in Simulink, you'll need to initialize the parameters by running the provided .m file in Matlab.
+If you want to try out the model in Simulink, you'll need to initialize the parameters by running the provided .m file in Matlab.
 
 ![simulink00](/docs/graphics/simulink_00.png)
 
-In Simulink, open the Settings page.
+Open the Simulink model and go to the Settings page.
 
 ![simulink01](/docs/graphics/simulink_01.png)
 
@@ -57,11 +61,11 @@ In the Code Generation tab, select the SIMATIC Target based on Simulink Coder as
 
 ![simulink02](/docs/graphics/simulink_02.png)
 
-In the SIMATIC Target options, choose LiveTwin for Industrial Edge and enter your Edge Device IP (with `/livetwin`), username and password, then connect to the LiveTwin application.
+In the SIMATIC Target options, choose LiveTwin for Industrial Edge and enter your Edge Device IP (with `/livetwin`), username, and password. Then, connect to the LiveTwin application.
 
 ![simulink03](/docs/graphics/simulink_03.png)
 
-In the Engineering Integration, configure your LiveTwin Template and Project accordingly. Cyclic time can be adjusted later in the app as well.
+In the Engineering Integration tab, configure your LiveTwin Template and Project accordingly. Cyclic time can be adjusted later in the app as well.
 
 ![simulink04](/docs/graphics/simulink_04.png)
 
@@ -69,13 +73,13 @@ In the Accessibility tab, activate the checkbox.
 
 ![simulink05](/docs/graphics/simulink_05.png)
 
-To upload your model to LiveTwin, do to the Simulink Coder App within Simulink and click Generate Code.
+To upload your model to LiveTwin, go to the Simulink Coder App in Simulink and click Generate Code. In LiveTwin, the model will be uploaded as a template and a project based on this template will be created.
 
 ![simulink06](/docs/graphics/simulink_06.png)
 
 ### Exported .zip File
 
-In case you don't have or don't want to use Matlab Simulink and SIMATIC Target, you can simply upload the provided .zip file in the LiveTwin WebUI. Start by creating a new template like in the screenshot:
+In case you don't have access to or don't want to use Matlab Simulink and SIMATIC Target, you can simply upload the provided .zip file in the LiveTwin WebUI. Start by creating a new template like in the screenshot:
 
 ![zip01](/docs/graphics/livetwin_zip_01.png)
 
@@ -93,15 +97,15 @@ Once a LiveTwin project has been created, you will have to configure the connect
 
 ![livetwin00](/docs/graphics/livetwin_settings_00.png)
 
-In the Server Settings tab, configure your Databus credentials.
+In the Server Settings tab, configure your Databus credentials. The output topic is not strictly necessary.
 
 ![livetwin01](/docs/graphics/livetwin_settings_01.png)
 
-In the Inputs/Outputs window, configure first the `pump_speed` input:
+In the Inputs/Outputs window, configure first the `pump_speed` input with the data source and variable name you used in the S7 Connector:
 
 ![livetwin02](/docs/graphics/livetwin_settings_02.png)
 
-And then the `flowrate_l_min` output:
+And then go to the next page and configure the `flowrate_lmin` output:
 
 ![livetwin03](/docs/graphics/livetwin_settings_03.png)
 
@@ -109,7 +113,7 @@ To obtain sensible results, you can adjust the model parameters `pressure_pipe_l
 
 ![livetwin04](/docs/graphics/livetwin_settings_04.png)
 
-The model is now configured and ready to run.
+Apply the changes. The model is now configured and ready to run.
 
 # Usage
 
@@ -119,7 +123,7 @@ Start your model instance:
 
 ![livetwin05](/docs/graphics/livetwin_settings_05.png)
 
-in the Monitoring window (left menu), open the Chart for your running instance:
+in the Monitoring window (left menu), open the chart for your running instance:
 
 ![livetwin06](/docs/graphics/livetwin_settings_06.png)
 
@@ -127,10 +131,12 @@ Select the relevant variables to monitor:
 
 ![livetwin07](/docs/graphics/livetwin_settings_07.png)
 
-Start Update in the upper right of the monitoring window.
+Start Update in the upper right of the monitoring window. You should now see the input and output variables with changing values.
 
 ![livetwin08](/docs/graphics/livetwin_settings_08.png)
 
 In TIA Portal, you can go online on the PLC and observe that the result `flow_rate_l_min` has been written back to the PLC from LiveTwin.
 
 ![livetwin09](/docs/graphics/livetwin_settings_09.png)
+
+The flow rate has thus been indirectly measured based on a Simulink model and the measured pump speed, removing the need for a hardware sensor.
