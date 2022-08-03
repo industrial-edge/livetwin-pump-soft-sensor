@@ -17,7 +17,7 @@
 
 ### PLC Program
 
-Download the provided [TIA Portal V17 project](src/LiveTwin_Pump.zap17) into your PLC. Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in l/min that will be written back to the PLC from LiveTwin.
+Download the provided [TIA Portal V17 project](/src/LiveTwin_Pump.zap17) into your PLC. Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in l/min that will be written back to the PLC from LiveTwin.
 
 ### Databus Configuration
 
