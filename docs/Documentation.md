@@ -33,6 +33,7 @@ Next, we need to configure the two data source in the S7 Connector. Start by con
 ![s702](/docs/graphics/s7_02.png)
 
 Add a new data source. With the provided TIA Portal program, an S7+ connection should be configured as follows (substitute the PLC IP address for your own):
+
 ![s703](/docs/graphics/s7_03.png)
 
 The following two datapoints are used in this example. Note the Name, Address, Data Type, Acquisition Cycle, and Access Mode (Read or Read & Write).
