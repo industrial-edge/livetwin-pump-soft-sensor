@@ -21,7 +21,7 @@ The following apps must be installed on your IED in order to complete this guide
 
 ### PLC Program
 
-Download the provided [TIA Portal V17 project](/src/LiveTwin_Pump.zap17) into your PLC. Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables of data type `Real`: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in `l/min` that will be written back to the PLC from LiveTwin.
+Download the provided [TIA Portal V17 project](/src/LiveTwin_Pump.zap17) into your PLC. It was originally compiled for a CPU 1212C FW V4.4, so you may need to adjust the device settings if you're using a different device. Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables of data type `Real`: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in `l/min` that will be written back to the PLC from LiveTwin.
 
 ### Databus Configuration
 
@@ -41,15 +41,16 @@ Add a new data source. With the provided TIA Portal program, an S7+ connection s
 ![s703](/docs/graphics/s7_03.png)
 
 The following two datapoints are used in this example. Note the Name, Address, Data Type, Acquisition Cycle, and Access Mode (Read or Read & Write).
+
 ![s704](/docs/graphics/s7_04.png)
 
 ## Model Import in LiveTwin
 
-This guide shows two different ways to import the Simulink model into LiveTwin. The first option is to use SIMATIC Target and export the model directly from a running Simulink instance to a running LiveTwin instance. The other way is to export the model as a .zip file and later upload it in the LiveTwin WebUI.
+This guide shows two different ways to import the [Simulink model](/src/Pump_simulation.slx) into LiveTwin. The first option is to use SIMATIC Target and export the model directly from a running Simulink instance to a running LiveTwin instance. The other way is to export the model as a [.zip](/src/pump_simulation_final.zip) file and later upload it in the LiveTwin WebUI.
 
 ### SIMATIC Target and Simulink
 
-If you want to try out the model in Simulink, you'll need to initialize the parameters by running the provided .m file in Matlab.
+If you want to try out the model in Simulink, you'll need to initialize the parameters by running the provided [.m file](/src/Parameter_pump_ksb.m) in Matlab.
 
 ![simulink00](/docs/graphics/simulink_00.png)
 
@@ -79,7 +80,7 @@ To upload your model to LiveTwin, go to the Simulink Coder App in Simulink and c
 
 ### Exported .zip File
 
-In case you don't have access to or don't want to use Matlab Simulink and SIMATIC Target, you can simply upload the provided .zip file in the LiveTwin WebUI. Start by creating a new template like in the screenshot:
+In case you don't have access to or don't want to use Matlab Simulink and SIMATIC Target, you can simply upload the provided [.zip](/src/pump_simulation_final.zip) file in the LiveTwin WebUI. Start by creating a new template like in the screenshot:
 
 ![zip01](/docs/graphics/livetwin_zip_01.png)
 

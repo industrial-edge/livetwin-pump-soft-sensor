@@ -42,7 +42,7 @@ The simulation parameters can then be configured and the simulation run in LiveT
 * Onboarded Industrial Edge Device (IED)
 * Installed apps on IED (see below)
 * PLC with the provided program connected to the IED
-* (optional) Installed MATLAB Simulink and Simatic Target V5.0 with network access to the IED
+* **(optional)** Installed MATLAB Simulink and Simatic Target V5.0 with network access to the IED
 
 ### Used components
 
@@ -54,9 +54,9 @@ The simulation parameters can then be configured and the simulation run in LiveT
 * IE Databus Configurator V 1.7.2
 * TIA Portal V17
 * PLC: CPU 1212C FW V4.4
-* MATLAB Simulink R2022a
-* Simscape Fluids (Trial License is sufficient)
-* SIMATIC Target V5.0
+* **(optional)** MATLAB Simulink R2022a
+* **(optional)** Simscape Fluids (Trial License is sufficient)
+* **(optional)** SIMATIC Target V5.0
 
 ## Installation and Usage
 
