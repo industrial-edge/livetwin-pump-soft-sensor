@@ -25,14 +25,18 @@ One approach to solve this issue is by mathematically modelling the system, usin
 
 ### General Task
 
-This example shows how to use the Industrial Edge App LiveTwin to implement a soft (virtual) sensor for a centrifugal pump based on a MATLAB Simulink model.
+![architecture](/docs/graphics/architecture.png)
+
+This example shows how to use the Industrial Edge App LiveTwin to implement a soft (also software or virtual) sensor for a centrifugal pump based on a MATLAB Simulink model.
+
+The model consists of hydraulic elements such as the pump itself and the intake and outlet pipes. The main input into the model is the pump rotational speed, based on which the output flowrate and pumped volume are calculated in various units. The remaining two inputs are meant for comparison with real world data and are not used in this example.
+
+![model](/docs/graphics/model.png)
 
 Using the SIMATIC Target software module, we can directly upload this model from Simulink to the LiveTwin app running on an Industrial Edge Device. Alternatively, the provided .zip file can also be uploaded into LiveTwin without having a local installation of MATLAB or SIMATIC Target.
 
 The simulation parameters can then be configured and the simulation run in LiveTwin. A PLC program provides changing input values of the pump rotational speed. The estimated flow rate is then written back into the PLC, where the results can be used to take action.
 
-
-![architecture](/docs/graphics/architecture.png)
 
 ## Requirements
 

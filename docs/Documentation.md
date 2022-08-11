@@ -1,5 +1,6 @@
 - [Installation](#installation)
-  - [PLC Connection](#plc-connection)
+  - [Environment Setup](#environment-setup)
+    - [Edge Device](#edge-device)
     - [PLC Program](#plc-program)
     - [Databus Configuration](#databus-configuration)
     - [S7 Connector Configuration](#s7-connector-configuration)
@@ -13,7 +14,9 @@
 
 # Installation
 
-## PLC Connection
+## Environment Setup
+
+### Edge Device
 
 The following apps must be installed on your IED in order to complete this guide:
 
@@ -46,7 +49,7 @@ The following two datapoints are used in this example. Note the Name, Address, D
 
 ## Model Import in LiveTwin
 
-This guide shows two different ways to import the [Simulink model](/src/Pump_simulation.slx) into LiveTwin. The first option is to use SIMATIC Target and export the model directly from a running Simulink instance to a running LiveTwin instance. The other way is to export the model as a [.zip](/src/pump_simulation_final.zip) file and later upload it in the LiveTwin WebUI.
+This guide shows two different ways to import the [Simulink model](/src/Pump_simulation.slx) into LiveTwin. The first option is to use SIMATIC Target and export the model directly from a running Simulink instance to a running LiveTwin instance. The other way is to export the model as a [.zip](/src/pump_simulation_final.zip) file and later upload it in the LiveTwin WebUI (the procedure used to generate the [provided file](/src/pump_simulation_final.zip) is described in [this guide](https://github.com/industrial-edge/livetwin-earthquake-detection/blob/main/docs/export_simulink_model.md)).
 
 ### SIMATIC Target and Simulink
 
@@ -82,6 +85,8 @@ To upload your model to LiveTwin, go to the Simulink Coder App in Simulink and c
 
 In case you don't have access to or don't want to use Matlab Simulink and SIMATIC Target, you can simply upload the provided [.zip](/src/pump_simulation_final.zip) file in the LiveTwin WebUI. Start by creating a new template like in the screenshot:
 
+![zip01](/docs/graphics/livetwin_zip_00.png)
+
 ![zip01](/docs/graphics/livetwin_zip_01.png)
 
 The model will be uploaded to LiveTwin.
@@ -106,9 +111,11 @@ In the Inputs/Outputs window, configure first the `pump_speed` input with the da
 
 ![livetwin02](/docs/graphics/livetwin_settings_02.png)
 
-And then go to the next page and configure the `flowrate_lmin` output:
+And then go to the next page and configure the `flowrate_lmin` (lowercase "L" for "liters") output:
 
 ![livetwin03](/docs/graphics/livetwin_settings_03.png)
+
+Make sure that the Tag Names given here match the names of the variables that were configured in the S7 Connector.
 
 To obtain sensible results, you can adjust the model parameters `pressure_pipe_length` and `pressure_pipe_outlet_height`, for example as follows:
 
