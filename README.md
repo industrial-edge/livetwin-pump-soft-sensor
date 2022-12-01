@@ -37,6 +37,8 @@ Using the SIMATIC Target software module, we can directly upload this model from
 
 The simulation parameters can then be configured and the simulation run in LiveTwin. A PLC program provides changing input values of the pump rotational speed. The estimated flow rate is then written back into the PLC, where the results can be used to take action.
 
+In case no PLC is available, running the LiveTwin model in Flow Creator mode is possible. A [flow](src/livetwin_pump_flow.json) is available to provide the model with reasonable input values.
+
 
 ## Requirements
 
@@ -45,7 +47,7 @@ The simulation parameters can then be configured and the simulation run in LiveT
 * Access to an Industrial Edge Management System (IEM)
 * Onboarded Industrial Edge Device (IED)
 * Installed apps on IED (see below)
-* PLC with the provided program connected to the IED
+* **(optional)** PLC with the provided program connected to the IED
 * **(optional)** Installed MATLAB Simulink and Simatic Target V5.0 with network access to the IED
 
 ### Used components
@@ -56,8 +58,9 @@ The simulation parameters can then be configured and the simulation run in LiveT
 * Common Connector Configurator V1.7.0-18
 * IE Databus V 1.7.0
 * IE Databus Configurator V 1.7.2
-* TIA Portal V17
-* PLC: CPU 1212C FW V4.4
+* **(optional)** Flow Creator V 1.3.9
+* **(optional)** TIA Portal V17
+* **(optional)** PLC: CPU 1212C FW V4.4
 * **(optional)** MATLAB Simulink R2022a
 * **(optional)** Simscape Fluids (Trial License is sufficient)
 * **(optional)** SIMATIC Target V5.0

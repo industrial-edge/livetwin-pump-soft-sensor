@@ -10,6 +10,7 @@
   - [Model Configuration in LiveTwin](#model-configuration-in-livetwin)
 - [Usage](#usage)
   - [Running the Model in LiveTwin](#running-the-model-in-livetwin)
+- [Input Generation in Flow Creator](#input-generation-in-flow-creator)
   
 
 # Installation
@@ -24,7 +25,7 @@ The following apps must be installed on your IED in order to complete this guide
 
 ### PLC Program
 
-Download the provided [TIA Portal V17 project](/src/LiveTwin_Pump.zap17) into your PLC. It was originally compiled for a CPU 1212C FW V4.4, so you may need to adjust the device settings if you're using a different device. Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables of data type `Real`: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in `l/min` that will be written back to the PLC from LiveTwin.
+Download the provided [TIA Portal V17 project](/src/pump_soft_sensor_plc.zap17) into your PLC. It was originally compiled for a CPU 1212C FW V4.4, so you may need to adjust the device settings if you're using a different device. In case no PLC or simulation is available, you can use [Flow Creator](#input-generation-in-flow-creator). Once running, the Data Block `GlobalDB_LiveTwin [DB62]` contains two variables of data type `Real`: `pump_speed` is the value that will be used as input for the simulation, and `flow_rate_l_min` is the calculated flow rate in `l/min` that will be written back to the PLC from LiveTwin.
 
 ### Databus Configuration
 
@@ -34,7 +35,7 @@ Configure a user in the Databus configurator and give this user permission to pu
 
 ### S7 Connector Configuration
 
-Next, we need to configure the two data source in the S7 Connector. Start by configuring the Databus credentials (created in the previous step) in the upper left corner.
+Next, we need to configure the two data points in the S7 Connector. Start by configuring the Databus credentials (created in the previous step) in the upper left corner.
 
 ![s701](/docs/graphics/s7_01.png)
 ![s702](/docs/graphics/s7_02.png)
@@ -43,17 +44,17 @@ Add a new data source. With the provided TIA Portal program, an S7+ connection s
 
 ![s703](/docs/graphics/s7_03.png)
 
-The following two datapoints are used in this example. Note the Name, Address, Data Type, Acquisition Cycle, and Access Mode (Read or Read & Write).
+The following two data points are used in this example. Note the Name, Address, Data Type, Acquisition Cycle, and Access Mode (Read or Read & Write).
 
 ![s704](/docs/graphics/s7_04.png)
 
 ## Model Import in LiveTwin
 
-This guide shows two different ways to import the [Simulink model](/src/Pump_simulation.slx) into LiveTwin. The first option is to use SIMATIC Target and export the model directly from a running Simulink instance to a running LiveTwin instance. The other way is to export the model as a [.zip](/src/pump_simulation_final.zip) file and later upload it in the LiveTwin WebUI (the procedure used to generate the [provided file](/src/pump_simulation_final.zip) is described in [this guide](https://github.com/industrial-edge/livetwin-earthquake-detection/blob/main/docs/export_simulink_model.md)).
+This guide shows two different ways to import the [Simulink model](/src/pump_soft_sensor.slx) into LiveTwin. The first option is to use SIMATIC Target and export the model directly from a running Simulink instance to a running LiveTwin instance. The other way is to export the model as a [.zip](/src/pump_soft_sensor.zip) file and later upload it in the LiveTwin WebUI (the procedure used to generate the [provided file](/src/pump_soft_sensor.zip) is described in [this guide](https://github.com/industrial-edge/livetwin-earthquake-detection/blob/main/docs/export_simulink_model.md)).
 
 ### SIMATIC Target and Simulink
 
-If you want to try out the model in Simulink, you'll need to initialize the parameters by running the provided [.m file](/src/Parameter_pump_ksb.m) in Matlab.
+If you want to try out the model in Simulink, you'll need to initialize the parameters by running the provided [.m file](/src/pump_soft_sensor_params.m) in Matlab.
 
 ![simulink00](/docs/graphics/simulink_00.png)
 
@@ -83,7 +84,7 @@ To upload your model to LiveTwin, go to the Simulink Coder App in Simulink and c
 
 ### Exported .zip File
 
-In case you don't have access to or don't want to use Matlab Simulink and SIMATIC Target, you can simply upload the provided [.zip](/src/pump_simulation_final.zip) file in the LiveTwin WebUI. Start by creating a new template like in the screenshot:
+In case you don't have access to or don't want to use Matlab Simulink and SIMATIC Target, you can simply upload the provided [.zip](/src/pump_soft_sensor.zip) file in the LiveTwin WebUI. Start by creating a new template like in the screenshot:
 
 ![zip01](/docs/graphics/livetwin_zip_00.png)
 
@@ -148,3 +149,25 @@ In TIA Portal, you can go online on the PLC and observe that the result `flow_ra
 ![livetwin09](/docs/graphics/livetwin_settings_09.png)
 
 The flow rate has thus been indirectly measured based on a Simulink model and the measured pump speed, removing the need for a hardware sensor.
+
+# Input Generation in Flow Creator
+
+In case you have no PLC available, you can also run the LiveTwin model in Flow Creator mode and provide inputs within Flow Creator directly. You can use the [provided flow](/src/livetwin_pump_flow.json) to simulate input values.
+
+In order to use Flow Creator, you have to select Flow Creator as the model type during project creation:
+
+![fc01](/docs/graphics/livetwin_fc_01.png)
+
+Import the provided flow and edit the LiveTwin node:
+
+![fc01](/docs/graphics/livetwin_fc_02.png)
+
+Select the model project you have created in LiveTwin:
+
+![fc01](/docs/graphics/livetwin_fc_03.png)
+
+Use the button to start or stop the instance:
+
+![fc01](/docs/graphics/livetwin_fc_04.png)
+
+You can then view the running model in the Monitoring tab of LiveTwin as usual, or observe the outputs in the "Output" debug node in Flow Creator.
