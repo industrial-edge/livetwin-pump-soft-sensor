@@ -1,37 +1,15 @@
-# Writing good how-to or tutorial
+# LiveTwin Pump Soft Sensor with MATLAB Simulink and SIMATIC Target
 
-Before you start writing, read the following materials how to write good documentation (including how-tos).
+Running a simulation model on an Industrial Edge Device using the Siemens app LiveTwin.
 
-* [Google Developer style guide](https://developers.google.com/style)
-* [Technical writing Courses](https://developers.google.com/tech-writing)
-* [Microsoft Writing Style Guide](https://docs.microsoft.com/cs-cz/style-guide/welcome/)
-
-Then decide: Are you writing a tutorial or a how-to guide?
-
-[Divio](https://documentation.divio.com/) explains the difference  (Note that this applies for software documentation for application developers)
-
-* Tutorials are lessons that take the reader by the hand through a series of steps to complete a project of some kind. They are what your project needs in order to show a beginner that they can achieve something with it. https://documentation.divio.com/tutorials/
-* How-to guides take the reader through the steps required to solve a real-world problem
-
-Each have a different writing style. Tutorials must be bullet proof (no unexpected behavior) https://documentation.divio.com/how-to-guides/
-
-Note: Try to write the tutorials and how-tos as a standalone html page, ready to be generated using Static site generator [MkDocs](https://www.mkdocs.org/). When referencing code examples or files, use the full URL of the git repository. We want to reuse these how-tos and tutorials in Documentation website.
-
-Don't explain concepts. [It gets in a way of action](https://documentation.divio.com/how-to-guides/#don-t-explain-concepts).  
-
-Don't use HTML tags unless working with videos. And try to avoid using videos unless absolutely necessary. Don't upload videos to Git repository.
-
-Bellow you can find the structure of IE tow-to/tutorial
-
-- [Writing good how-to or tutorial](#writing-good-how-to-or-tutorial)
+- [LiveTwin Pump Soft Sensor with MATLAB Simulink and SIMATIC Target](#livetwin-pump-soft-sensor-with-matlab-simulink-and-simatic-target)
   - [Description](#description)
     - [Overview](#overview)
     - [General Task](#general-task)
   - [Requirements](#requirements)
     - [Prerequisites](#prerequisites)
     - [Used components](#used-components)
-  - [Installation](#installation)
-  - [Usage](#usage)
+  - [Installation and Usage](#installation-and-usage)
   - [Documentation](#documentation)
   - [Contribution](#contribution)
   - [License and Legal Information](#license-and-legal-information)
@@ -40,53 +18,60 @@ Bellow you can find the structure of IE tow-to/tutorial
 
 ### Overview
 
-Why has been this how-to/tutorial created? What is the purpose?
+In many industrial use-cases, information about internal states of a system is often required, but necessitates the purchase and integration of hardware sensors. Some states may not be directly measurable at all.
+
+One approach to solve this issue is by mathematically modelling the system, using real input data for the simulation, and observing the internal states of this virtual counterpart. In this example, a Simulink model of a centrifugal pump has been provided in order to estimate the flow rate based on the pump rotational speed.
+
 
 ### General Task
 
-What is the general goal/task of this how-to/tutorial?
+![architecture](/docs/graphics/architecture.png)
 
-![task](docs/graphics/example_graphic.png)
+This example shows how to use the Industrial Edge App LiveTwin to implement a soft (also software or virtual) sensor for a centrifugal pump based on a MATLAB Simulink model.
+
+The model consists of hydraulic elements such as the pump itself and the intake and outlet pipes. The main input into the model is the pump rotational speed, based on which the output flowrate and pumped volume are calculated in various units. The remaining two inputs are meant for comparison with real world data and are not used in this example.
+
+![model](/docs/graphics/model.png)
+
+Using the SIMATIC Target software module, we can directly upload this model from Simulink to the LiveTwin app running on an Industrial Edge Device. Alternatively, the provided .zip file can also be uploaded into LiveTwin without having a local installation of MATLAB or SIMATIC Target.
+
+The simulation parameters can then be configured and the simulation run in LiveTwin. A PLC program provides changing input values of the pump rotational speed. The estimated flow rate is then written back into the PLC, where the results can be used to take action.
+
+In case no PLC is available, running the LiveTwin model in Flow Creator mode is possible. A [flow](src/livetwin_pump_flow.json) is available to provide the model with reasonable input values.
+
 
 ## Requirements
 
 ### Prerequisites
 
-What are the requirements on the user knowledge, HW components before starting the how-to?
+* Access to an Industrial Edge Management System (IEM)
+* Onboarded Industrial Edge Device (IED)
+* Installed apps on IED (see below)
+* **(optional)** PLC with the provided program connected to the IED
+* **(optional)** Installed MATLAB Simulink and Simatic Target V5.0 with network access to the IED
 
 ### Used components
 
-List the used software and hardware components that were tested with this how-to.
-Add the used components here (e.g.)
+* Industrial Edge Device V1.7.0-18
+* LiveTwin V2.1.16
+* S7 Connector V1.7.0-27
+* Common Connector Configurator V1.7.0-18
+* IE Databus V 1.7.0
+* IE Databus Configurator V 1.7.2
+* **(optional)** Flow Creator V 1.3.9
+* **(optional)** TIA Portal V17
+* **(optional)** PLC: CPU 1212C FW V4.4
+* **(optional)** MATLAB Simulink R2022a
+* **(optional)** Simscape Fluids (Trial License is sufficient)
+* **(optional)** SIMATIC Target V5.0
 
-* Industrial Edge App Publisher V1.0.8
-* Docker Engine 18.09.6
-* Docker Compose V2.4
-* S7 Connector V 1.0.22
-* S7 Connector Configurator V 1.0.9
-* Industrial Edge Device V 1.0.0-34
-* TIA Portal V16
-* PLC: CPU 1511 FW 2.8.3
+## Installation and Usage
 
-## Installation
-
-How to install/run this application example? (i.e. how to deploy it to Industrial Edge device?) How to build this application? How to set up configurations in IE?
-
-To keep the readme.md file as short as possible please add more detailed information in the docs folder.
-
-* [Build application](docs/Installation.md#build-application)
-
-## Usage
-
-When the app is installed, how can I use it? Usually some basic UI description to prove that the app is working correctly.
+You can find the installation and usage instructions in the [documentation](docs/Documentation.md).
 
 ## Documentation
 
-Add links to documentation. Either on external URL or in the doc folder. Please use always link to a file not to a directory (it doesn't work with static site generator engines).
-
-Add these links:
-
-You can find further documentation and help in the following links
+You can find further documentation and help in the following links:
 
 * [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/#/documentation)
 * [Industrial Edge Forum](https://www.siemens.com/industrial-edge-forum)
