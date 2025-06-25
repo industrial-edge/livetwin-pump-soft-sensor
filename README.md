@@ -55,9 +55,9 @@ In case no PLC is available, running the LiveTwin model in Flow Creator mode is 
 * Industrial Edge Device V3.0.0-51
 * LiveTwin V2.4.1
 * S7 Connector V2.3.1
-* Common Configurator V 2.1.0
 * Databus V 3.2.1
 * IEM Databus Configurator
+* IEM Common Configurator
 * **(optional)** Flow Creator V 1.19.0
 * **(optional)** TIA Portal >V17
 * **(optional)** PLC: CPU 1212C FW V4.4
