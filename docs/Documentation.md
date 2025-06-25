@@ -20,8 +20,11 @@
 ### Edge Device
 
 The following apps must be installed on your IED in order to complete this guide:
+* LiveTwin
+* Databus
+* S7 Connector
+* **(optional)**  Common Configurator (if it is prefered to configure the connection direct on the IED)
 
-![ied01](/docs/graphics/ied_01.png)
 
 ### PLC Program
 
@@ -32,21 +35,31 @@ Download the provided [TIA Portal V17 project](/src/pump_soft_sensor_plc.zap17) 
 Configure a user in the Databus configurator and give this user permission to publish and subscribe to the topic `ie/#`. This is where the data will be exchanged between the S7 Connector and LiveTwin.
 
 ![databus01](/docs/graphics/databus_01.png)
+Finally enable the WebSocket Protocol in the Settings and push deploy.
+![databus01](/docs/graphics/databus_02.png)
 
 ### S7 Connector Configuration
 
-Next, we need to configure the two data points in the S7 Connector. Start by configuring the Databus credentials (created in the previous step) in the upper left corner.
+Next, we need to configure the two data points in the S7 Connector this is done in the Common Configurator accessable at the launchpad of the IEM or if installed on the IED.
+After launching the Common Configurator on the IEM select your IED.
+![launchpad01](/docs/graphics/launchpad.png)
 
-![s701](/docs/graphics/s7_01.png)
-![s702](/docs/graphics/s7_02.png)
+With the provided TIA Portal program, an S7+ connection should be configured as follows (substitute the PLC IP address for your own):
 
-Add a new data source. With the provided TIA Portal program, an S7+ connection should be configured as follows (substitute the PLC IP address for your own):
+![s705](/docs/graphics/s7_05.png)
+![s706](/docs/graphics/s7_06.png)
 
-![s703](/docs/graphics/s7_03.png)
+All accessable Datapoints can be listed with the browsing button in the S7 Connector Tab of the Common Configurator. 
+The required Datapoints (GlobalDB_LiveTwin.pump_speed and GlobalDB_LiveTwin.flow_rate_l_min) can be selected with Save for Import and subsequently after pressing the  "Add to Data Source" button,  the datapoints are visualized as Tags in the Common Configurator. Finally the tags need to be deployed with the Button "deploy".
 
-The following two data points are used in this example. Note the Name, Address, Data Type, Acquisition Cycle, and Access Mode (Read or Read & Write).
+![s707](/docs/graphics/s7_07.png)
 
-![s704](/docs/graphics/s7_04.png)
+
+Finally the databus credentials need to be set in the Common Configurator.
+
+
+![s708](/docs/graphics/s7_08.png)
+
 
 ## Model Import in LiveTwin
 
